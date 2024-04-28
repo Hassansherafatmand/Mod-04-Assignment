@@ -1,0 +1,132 @@
+//Storing Data in Local Storage:
+    Imagine you have a web application where users can create and save their preferences. You might store these preferences (such as font size or color theme) as a JavaScript object:
+
+    JavaScript:
+    const userPreferences = {
+      fontSize: 16,
+      theme: "dark",
+    };
+
+    // Convert the object to JSON before storing
+    const jsonString = JSON.stringify(userPreferences);
+    localStorage.setItem("userPrefs", jsonString);
+
+    // Later, to retrieve the data:
+    const retrievedString = localStorage.getItem("userPrefs");
+    const userPreferencesAgain = JSON.parse(retrievedString);
+
+    // Now you can use userPreferencesAgain object
+    console.log(userPreferencesAgain.fontSize); 
+****************************************************************************
+
+
+
+//Defining the DATA in JSON
+let legacyGame = [
+  {
+    "name": "The Witcher 3: Wild Hunt",
+    "price": "29.99",
+    "players": "Single Player",
+    "release_date": "May 19, 2015"
+  },
+  {
+    "name": "Red Dead Redemption 2",
+    "price": "59.99",
+    "players": "Single Player, Multiplayer",
+    "release_date": "October 26, 2018"
+  },
+  {
+    "name": "Fortnite",
+    "price": "54.23",
+    "players": "Multiplayer",
+    "release_date": "July 25, 2017"
+  },
+  {
+    "name": "Minecraft",
+    "price": "26.95",
+    "players": "Single Player, Multiplayer",
+    "release_date": "November 18, 2011"
+  },
+  {
+    "name": "Sonic the Hedgehog",
+    "price": "19.99",
+    "players": "Single Player",
+    "release_date": "June 23, 1991"
+  },
+  {
+    "name": "Sega Genesis Classics",
+    "price": "29.99",
+    "players": "Single Player, Multiplayer",
+    "release_date": "May 29, 2018"
+  }
+  
+];
+
+ let gameInfo = JSON.stringify(legacyGame);
+ legacyGame = JSON.parse(gameInfo);
+//  console.log(gameInfo);
+//  console.table(gameInfo)
+
+
+
+
+let total = 0;
+const table = document.querySelector('#gameTable');
+
+for (let i in legacyGame){
+  //create the element
+  const row = document.createElement("tr");
+  const dataColumn1 = document.createElement("td");
+  const dataColumn2 = document.createElement("td");
+  const dataColumn3 = document.createElement("td");
+  const dataColumn4 = document.createElement("td");
+
+  //row 1 content
+  dataColumn1.textContent = legacyGame[i].name;
+  dataColumn2.textContent = legacyGame[i].price;
+  dataColumn3.textContent = legacyGame[i].players;
+  dataColumn4.textContent = legacyGame[i].release_date;
+
+  //append
+  row.appendChild(dataColumn1);
+  row.appendChild(dataColumn2);
+  row.appendChild(dataColumn3);
+  row.appendChild(dataColumn4);
+
+  table.appendChild(row);
+
+
+  // Calculate total price
+  if (!isNaN(parseFloat(legacyGame[i].price))) {
+    total += parseFloat(legacyGame[i].price);
+  } else {
+    console.error("Invalid price for item:", legacyGame[i]);
+  }
+
+}
+
+
+const totalPrice = document.querySelector('#totalPrice');
+
+console.log("Total Pice is: " + total.toFixed(2));
+
+const tableFoot = document.createElement("tfoot");
+const footRow = document.createElement("tr");
+
+const footDataColumn1 = document.createElement("td");
+const footDataColumn2 = document.createElement("td");
+footDataColumn1.textContent = "Total";
+footDataColumn2.textContent = "$ " + total.toFixed(2);
+
+footRow.appendChild(footDataColumn1);
+footRow.appendChild(footDataColumn2);
+tableFoot.appendChild(footRow);
+table.appendChild(tableFoot)
+
+
+
+
+
+
+
+
